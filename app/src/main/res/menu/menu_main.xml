@@ -6,5 +6,6 @@
         android:id="@+id/shopping_cart"
         android:orderInCategory="100"
         android:title="Shopping Cart"
+        android:actionLayout="@layout/cart_layout"
         app:showAsAction="ifRoom" />
 </menu>

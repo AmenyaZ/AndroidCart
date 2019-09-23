@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.cart.adapter.UtensilsAdapter;
+import com.example.cart.data.Utensils;
 import com.example.cart.helper.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -61,11 +64,10 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater layoutInflater= LayoutInflater.from(this);
         View view = layoutInflater.inflate(R.layout.cart_layout,null);
         view.setBackgroundResource(image);
+        TextView textView = view.findViewById(R.id.textViewQty);
         if (count==0){
-            View counterTextPanel = view.findViewById(R.id.counterValuePanel);
-            counterTextPanel.setVisibility(View.GONE);
+            textView.setVisibility(View.GONE);
         }else {
-            TextView textView = view.findViewById(R.id.count);
             textView.setText(String.valueOf(count));
         }
         view.measure(
@@ -84,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id==R.id.shopping_cart){
             //navigate to cart
+            Intent intent = new Intent(MainActivity.this,CartActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

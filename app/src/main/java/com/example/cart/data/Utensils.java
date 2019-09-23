@@ -1,4 +1,4 @@
-package com.example.cart;
+package com.example.cart.data;
 
 public class Utensils {
 

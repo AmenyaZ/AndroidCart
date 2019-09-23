@@ -1,4 +1,4 @@
-package com.example.cart;
+package com.example.cart.adapter;
 
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -6,11 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cart.MainActivity;
+import com.example.cart.R;
+import com.example.cart.data.Utensils;
 
 import java.util.List;
 
