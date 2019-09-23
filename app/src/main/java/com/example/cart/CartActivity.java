@@ -2,6 +2,8 @@ package com.example.cart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.example.cart.adapter.CartAdapter;
 import com.example.cart.data.Cart;
 import com.example.cart.helper.DatabaseHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,9 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CartAdapter cartAdapter;
     public static DatabaseHelper databaseHelper;
+
+    ConstraintLayout constraintLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,7 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(cartAdapter);
+        constraintLayout=findViewById(R.id.constraintLayout);
 
         Cursor cursor = databaseHelper.getCartData();
         cartList.clear();
@@ -56,7 +63,8 @@ public class CartActivity extends AppCompatActivity {
         }
         cartAdapter.notifyDataSetChanged();
         if (cartList.size() == 0) {
-            Toast.makeText(this, "Cart is Empty", Toast.LENGTH_LONG).show();
+            Snackbar snackbar = Snackbar.make(constraintLayout,"Cart Empty",Snackbar.LENGTH_LONG);
+            snackbar.show();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -74,6 +82,9 @@ public class CartActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.action_empty:
                 databaseHelper.clearData();
+                Intent intentR = new Intent(CartActivity.this,CartActivity.class);
+                finish();
+                startActivity(intentR);
                 break;
             case android.R.id.home:
                 Intent intent = new Intent(CartActivity.this,MainActivity.class);
