@@ -1,12 +1,16 @@
 package com.example.cart;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.cart.adapter.CartAdapter;
@@ -54,6 +58,38 @@ public class CartActivity extends AppCompatActivity {
         if (cartList.size() == 0) {
             Toast.makeText(this, "Cart is Empty", Toast.LENGTH_LONG).show();
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cart,menu);
+      //  getActionBar().setDisplayHomeAsUpEnabled(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_empty:
+                databaseHelper.clearData();
+                break;
+            case android.R.id.home:
+                Intent intent = new Intent(CartActivity.this,MainActivity.class);
+                finish();
+                startActivity(intent);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+
+
 }
