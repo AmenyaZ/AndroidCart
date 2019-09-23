@@ -1,5 +1,8 @@
 package com.example.cart.adapter;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +23,11 @@ import java.util.List;
 public class UtensilsAdapter extends RecyclerView.Adapter<UtensilsAdapter.ViewHolder> {
 
     private List<Utensils> utensilsList;
+    private Context context;
 
-    public UtensilsAdapter(List<Utensils> utensilsList) {
+    public UtensilsAdapter(List<Utensils> utensilsList, Context context) {
         this.utensilsList = utensilsList;
+        this.context = context;
     }
 
     @NonNull
@@ -45,8 +50,12 @@ public class UtensilsAdapter extends RecyclerView.Adapter<UtensilsAdapter.ViewHo
                 Cursor cursor = MainActivity.databaseHelper.checkProduct(utensils.getId());
                 if (cursor.getCount()==0){
                     MainActivity.databaseHelper.insertData(utensils.getId(),utensils.getName(),utensils.getPrice(),"1");
+                    context.startActivity(new Intent(context, MainActivity.class));
+                    ((Activity)context).finish();
                 }else {
                     MainActivity.databaseHelper.updateData(utensils.getId(),String.valueOf(MainActivity.databaseHelper.getProductQuantity(utensils.getId())+1));
+                    context.startActivity(new Intent(context, MainActivity.class));
+                    ((Activity)context).finish();
                 }
 
             }

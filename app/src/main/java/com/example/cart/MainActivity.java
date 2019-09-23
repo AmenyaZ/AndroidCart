@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         databaseHelper = new DatabaseHelper(this);
 
-        utensilsAdapter = new UtensilsAdapter(utensilsList);
+        utensilsAdapter = new UtensilsAdapter(utensilsList,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         utensils = new Utensils("4","Spoons", "200", R.drawable.spoons);
         utensilsList.add(utensils);
 
-        utensils = new Utensils("5","Utensils Rack", "10,000", R.drawable.rack);
+        utensils = new Utensils("5","Utensils Rack", "10000", R.drawable.rack);
         utensilsList.add(utensils);
 
         utensils = new Utensils("6","Pressure Cooker", "1890", R.drawable.pressure_cooker);
