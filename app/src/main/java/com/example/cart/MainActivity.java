@@ -2,6 +2,7 @@ package com.example.cart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +17,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cart.helper.DatabaseHelper;
 
@@ -53,21 +57,23 @@ public class MainActivity extends AppCompatActivity {
        // int count = databaseHelper.cartQty();
         Cursor cursor = databaseHelper.cartQty();
         System.out.println(cursor.getCount());
-        menuItem.setIcon(buildCounterDrawable(cursor.getCount(),R.drawable.ic_shopping_cart));
+        menuItem.setIcon(buildCounterDrawable(cursor.getCount(),R.drawable.ic_shopping_basket));
+
         return true;
     }
 
     private Drawable buildCounterDrawable(int count, int image) {
         LayoutInflater layoutInflater= LayoutInflater.from(this);
-        View view = layoutInflater.inflate(R.layout.cart_layout,null);
+        View view = layoutInflater.inflate(R.layout.cart_layout_2,null);
         view.setBackgroundResource(image);
+        TextView textView = view.findViewById(R.id.textViewQty);
         if (count==0){
-            View counterTextPanel = view.findViewById(R.id.counterValuePanel);
-            counterTextPanel.setVisibility(View.GONE);
-        }else {
-            TextView textView = view.findViewById(R.id.count);
+//            View counterTextPanel = view.findViewById(R.id.counterValuePanel);
+//            counterTextPanel.setVisibility(View.GONE);
+            textView.setVisibility(View.GONE);
+       }else {
             textView.setText(String.valueOf(count));
-        }
+       }
         view.measure(
                 View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));
@@ -78,6 +84,27 @@ public class MainActivity extends AppCompatActivity {
         view.setDrawingCacheEnabled(false);
         return new BitmapDrawable(getResources(),bitmap);
     }
+//    private Drawable buildCounterDrawable(int count, int image) {
+//        LayoutInflater layoutInflater= LayoutInflater.from(this);
+//        View view = layoutInflater.inflate(R.layout.cart_layout,null);
+//        view.setBackgroundResource(image);
+//        if (count==0){
+//            View counterTextPanel = view.findViewById(R.id.counterValuePanel);
+//            counterTextPanel.setVisibility(View.GONE);
+//        }else {
+//            TextView textView = view.findViewById(R.id.count);
+//            textView.setText(String.valueOf(count));
+//        }
+//        view.measure(
+//                View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED),
+//                View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));
+//        view.layout(0,0,view.getMeasuredWidth(),view.getMeasuredHeight());
+//        view.setDrawingCacheEnabled(true);
+//        view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+//        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+//        view.setDrawingCacheEnabled(false);
+//        return new BitmapDrawable(getResources(),bitmap);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -87,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     private void prepareUtensilsData() {
         Utensils utensils = new Utensils("1","Wooden Utensils", "2000", R.drawable.wooden_utensils);
