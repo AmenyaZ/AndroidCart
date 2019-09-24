@@ -13,6 +13,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cart.adapter.CartAdapter;
@@ -31,7 +34,8 @@ public class CartActivity extends AppCompatActivity {
     public static DatabaseHelper databaseHelper;
 
     ConstraintLayout constraintLayout;
-
+TextView textViewTotal;
+Button buttonCheckout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,10 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(cartAdapter);
         constraintLayout=findViewById(R.id.constraintLayout);
+        textViewTotal = findViewById(R.id.textViewTotal);
+        buttonCheckout = findViewById(R.id.btn_checkout);
+
+        textViewTotal.setText(String.valueOf(databaseHelper.getTotal()));
 
         Cursor cursor = databaseHelper.getCartData();
         cartList.clear();
@@ -67,6 +75,14 @@ public class CartActivity extends AppCompatActivity {
             snackbar.show();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        buttonCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar snackbar = Snackbar.make(constraintLayout,"Feature coming soon. No worries :-)",Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+        });
 
     }
 
