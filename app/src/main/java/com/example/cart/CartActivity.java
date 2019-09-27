@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,9 +23,13 @@ import com.example.cart.adapter.CartAdapter;
 import com.example.cart.data.Cart;
 import com.example.cart.helper.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -37,10 +42,16 @@ public class CartActivity extends AppCompatActivity {
 TextView textViewTotal;
 Button buttonCheckout;
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String PATH_TO_SERVER = "http://192.168.43.17/www.android.com/braintree/index.php";
+    private String clientToken;
+    private static final int BRAINTREE_REQUEST_CODE = 4949;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        getClientTokenFromServer();
         recyclerView = findViewById(R.id.rv_cart);
         databaseHelper=new DatabaseHelper(this);
         cartAdapter = new CartAdapter(cartList);
@@ -116,4 +127,22 @@ Button buttonCheckout;
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+    private void getClientTokenFromServer(){
+        AsyncHttpClient androidClient = new AsyncHttpClient();
+        androidClient.get(PATH_TO_SERVER, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d(TAG, getString(R.string.token_failed) + responseString);
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseToken) {
+                Log.d(TAG, "Client token: " + responseToken);
+                clientToken = responseToken;
+            }
+        });
+    }
+
+
+
 }

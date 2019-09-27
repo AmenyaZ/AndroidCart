@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Cart</string>
+    <string name="token_failed">Fail to retrieve client token </string>
 </resources>
