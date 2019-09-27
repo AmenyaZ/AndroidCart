@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.braintreepayments.api.dropin.DropInActivity;
+import com.braintreepayments.api.dropin.DropInRequest;
 import com.braintreepayments.api.dropin.DropInResult;
 import com.example.cart.adapter.CartAdapter;
 import com.example.cart.data.Cart;
@@ -95,8 +96,7 @@ Button buttonCheckout;
         buttonCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar snackbar = Snackbar.make(constraintLayout,"Feature coming soon. No worries :-)",Snackbar.LENGTH_LONG);
-                snackbar.show();
+                onBraintreeSubmit(v);
             }
         });
 
@@ -179,5 +179,10 @@ Button buttonCheckout;
                 Log.d(TAG, " error exception");
             }
         }
+    }
+
+    public void onBraintreeSubmit(View view){
+        DropInRequest dropInRequest = new DropInRequest().clientToken(clientToken);
+        startActivityForResult(dropInRequest.getIntent(this), BRAINTREE_REQUEST_CODE);
     }
 }
