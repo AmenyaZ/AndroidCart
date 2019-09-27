@@ -24,6 +24,7 @@ import com.example.cart.data.Cart;
 import com.example.cart.helper.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
@@ -139,6 +140,21 @@ Button buttonCheckout;
             public void onSuccess(int statusCode, Header[] headers, String responseToken) {
                 Log.d(TAG, "Client token: " + responseToken);
                 clientToken = responseToken;
+            }
+        });
+    }
+
+    private void sendPaymentNonceToServer(String paymentNonce){
+        RequestParams params = new RequestParams("NONCE", paymentNonce);
+        AsyncHttpClient androidClient = new AsyncHttpClient();
+        androidClient.post(PATH_TO_SERVER, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d(TAG, "Error: Failed to create a transaction");
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.d(TAG, "Output " + responseString);
             }
         });
     }
