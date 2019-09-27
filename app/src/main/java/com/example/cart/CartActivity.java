@@ -1,6 +1,7 @@
 package com.example.cart;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.braintreepayments.api.dropin.DropInActivity;
+import com.braintreepayments.api.dropin.DropInResult;
 import com.example.cart.adapter.CartAdapter;
 import com.example.cart.data.Cart;
 import com.example.cart.helper.DatabaseHelper;
@@ -159,6 +163,21 @@ Button buttonCheckout;
         });
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == BRAINTREE_REQUEST_CODE){
+            if (RESULT_OK == resultCode){
+                DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
+                String paymentNonce = result.getPaymentMethodNonce().getNonce();
+                //send to your server
+                Log.d(TAG, "Testing the app here");
+                sendPaymentNonceToServer(paymentNonce);
+            }else if(resultCode == Activity.RESULT_CANCELED){
+                Log.d(TAG, "User cancelled payment");
+            }else {
+                Exception error = (Exception)data.getSerializableExtra(DropInActivity.EXTRA_ERROR);
+                Log.d(TAG, " error exception");
+            }
+        }
+    }
 }
