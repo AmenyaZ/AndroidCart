@@ -1,17 +1,26 @@
 package com.example.cart.data;
 
 public class Cart {
-    private String name,quantity,price;
+    private String id,name,quantity,price;
     private int total;
 
-    public Cart(String name, String quantity, String price) {
+    public Cart(String id, String name, String quantity, String price, int total) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.total = total;
     }
 
-
     public Cart() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
