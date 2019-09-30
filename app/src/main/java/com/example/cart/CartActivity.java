@@ -47,7 +47,7 @@ TextView textViewTotal;
 Button buttonCheckout;
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String PATH_TO_SERVER = "http://192.168.43.17/www.android.com/braintree/index.php";
+    private static final String PATH_TO_SERVER = "http://192.168.0.102/www.android.com/braintree/index.php";
     private String clientToken;
     private static final int BRAINTREE_REQUEST_CODE = 4949;
 
