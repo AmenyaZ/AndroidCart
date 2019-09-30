@@ -58,7 +58,7 @@ Button buttonCheckout;
         getClientTokenFromServer();
         recyclerView = findViewById(R.id.rv_cart);
         databaseHelper=new DatabaseHelper(this);
-        cartAdapter = new CartAdapter(cartList);
+        cartAdapter = new CartAdapter(cartList,this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -74,11 +74,12 @@ Button buttonCheckout;
         cartList.clear();
         while (cursor.moveToNext()) {
             Cart cart = new Cart();
-            int id = cursor.getInt(0);
+            String id = String.valueOf(cursor.getInt(0));
             String name = cursor.getString(1);
             String price = cursor.getString(2);
             String quantity = cursor.getString(3);
 
+            cart.setId(id);
             cart.setName(name);
             cart.setPrice(price);
             cart.setQuantity(quantity);
