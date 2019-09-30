@@ -30,7 +30,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:text="Quantity"
+        android:text="Price"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -45,7 +45,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:text="Price"
+        android:text="Total"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -60,7 +60,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:text="Total"
+        android:text="Action"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="247dp" />
+        app:layout_constraintGuide_end="227dp" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -87,14 +87,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="162dp" />
+        app:layout_constraintGuide_end="181dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="91dp" />
+        app:layout_constraintGuide_percent="0.72" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cart"
