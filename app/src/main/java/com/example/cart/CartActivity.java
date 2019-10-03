@@ -47,7 +47,7 @@ TextView textViewTotal;
 Button buttonCheckout;
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String PATH_TO_SERVER = "http://192.168.0.102/www.android.com/braintree/index.php";
+    private static final String PATH_TO_SERVER = "http://192.168.74.212/www.android.com/braintree/index.php";
     private String clientToken;
     private static final int BRAINTREE_REQUEST_CODE = 4949;
 
@@ -150,7 +150,7 @@ Button buttonCheckout;
     private void sendPaymentNonceToServer(String paymentNonce){
         RequestParams params = new RequestParams("NONCE", paymentNonce);
         AsyncHttpClient androidClient = new AsyncHttpClient();
-        androidClient.post(PATH_TO_SERVER, params, new TextHttpResponseHandler() {
+        androidClient.post(PATH_TO_SERVER+"?&&amount="+databaseHelper.getTotal(), params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d(TAG, "Error: Failed to create a transaction");
@@ -158,6 +158,10 @@ Button buttonCheckout;
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.d(TAG, "Output " + responseString);
+                databaseHelper.clearData();
+                Intent intent = new Intent(CartActivity.this,CartActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
     }
