@@ -9,13 +9,14 @@ import android.database.sqlite.SQLiteStatement;
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String database="cart.db";
+    public static final String database="cart";
     public static final String table_name="cart";
     public static final String id="id";
     public static final String name="name";
     public static final String price="price";
     public static final String quantity="quantity";
     public static final String total="total";
+    public static final String image="image";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, database, null, 1);
@@ -24,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-db.execSQL("CREATE TABLE " + table_name + " (" + id +" INTEGER PRIMARY KEY, " + name + " varchar(50), " + price + " varchar(50), " + quantity + " varchar(50)," + total + " varchar(50))");
+db.execSQL("CREATE TABLE " + table_name + " (" + id +" INTEGER PRIMARY KEY, " + name + " varchar(50), " + price + " varchar(50), " + quantity + " varchar(50)," + total + " varchar(50)," + image + " TEXT ) ");
     }
 
     @Override
@@ -33,9 +34,9 @@ db.execSQL("DROP TABLE IF EXISTS "+table_name);
 onCreate(db);
     }
 
-    public void insertData(String id,String name,String price,String quantity,String total){
+    public void insertData(String id,String name,String price,String quantity,String total,String image){
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "INSERT INTO " + table_name + "(id,name,price,quantity,total)VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO " + table_name + "(id,name,price,quantity,total,image)VALUES(?,?,?,?,?,?)";
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1,id);
@@ -43,6 +44,7 @@ onCreate(db);
         statement.bindString(3,price);
         statement.bindString(4,quantity);
         statement.bindString(5,total);
+        statement.bindString(6,image);
         statement.executeInsert();
         statement.close();
         database.close();
