@@ -93,64 +93,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prepareUtensilsData() {
-        Utensils utensils = new Utensils("1","Wooden Utensils", "2000", R.drawable.wooden_utensils);
+        Utensils utensils = new Utensils("1","Wooden Utensils", "2000", R.drawable.wooden_utensils,"wooden_utensils.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("2","Tea Spoon", "65", R.drawable.tea_spoon);
+        utensils = new Utensils("2","Tea Spoon", "65", R.drawable.tea_spoon,"tea_spoon.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("3","Spoons Pack", "1500", R.drawable.spoons_pack);
+        utensils = new Utensils("3","Spoons Pack", "1500", R.drawable.spoons_pack,"spoons_pack.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("4","Spoons", "200", R.drawable.spoons);
+        utensils = new Utensils("4","Spoons", "200", R.drawable.spoons,"spoons.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("5","Utensils Rack", "10000", R.drawable.rack);
+        utensils = new Utensils("5","Utensils Rack", "10000", R.drawable.rack,"rack.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("6","Pressure Cooker", "1890", R.drawable.pressure_cooker);
+        utensils = new Utensils("6","Pressure Cooker", "1890", R.drawable.pressure_cooker,"pressure_cooker.png");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("7","Pots", "500", R.drawable.pots);
+        utensils = new Utensils("7","Pots", "500", R.drawable.pots,"pots.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("8","Plate", "280", R.drawable.plate);
+        utensils = new Utensils("8","Plate", "280", R.drawable.plate,"plate.jpeg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("9","Pan", "700", R.drawable.pan);
+        utensils = new Utensils("9","Pan", "700", R.drawable.pan,"pan.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("10","Knife", "150", R.drawable.knife);
+        utensils = new Utensils("10","Knife", "150", R.drawable.knife,"knife.jpeg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("11","Iron Pan", "550", R.drawable.iron_pan);
+        utensils = new Utensils("11","Iron Pan", "550", R.drawable.iron_pan,"iron_pan.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("12","Hot Pot", "450", R.drawable.hot_pot);
+        utensils = new Utensils("12","Hot Pot", "450", R.drawable.hot_pot,"hot_pt.png");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("13","Grater", "350", R.drawable.grater);
+        utensils = new Utensils("13","Grater", "350", R.drawable.grater,"grater.jpeg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("14","Fork, Spoon & Knife", "600", R.drawable.fork_spoon_knife);
+        utensils = new Utensils("14","Fork, Spoon & Knife", "600", R.drawable.fork_spoon_knife,"fork_spoon_knife.png");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("15","Dipper", "200", R.drawable.dipper);
+        utensils = new Utensils("15","Dipper", "200", R.drawable.dipper,"dipper.png");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("16","Cutting Board", "350", R.drawable.cutting_board);
+        utensils = new Utensils("16","Cutting Board", "350", R.drawable.cutting_board,"cutting_board.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("17","Cooking Stick", "350", R.drawable.cooking_stick);
+        utensils = new Utensils("17","Cooking Stick", "350", R.drawable.cooking_stick,"cooking_stick.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("18","Cooking Pots", "350", R.drawable.cooking_pots);
+        utensils = new Utensils("18","Cooking Pots", "350", R.drawable.cooking_pots,"cooking_pots.jpg");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("19","Container", "350", R.drawable.container);
+        utensils = new Utensils("19","Container", "350", R.drawable.container,"container.png");
         utensilsList.add(utensils);
 
-        utensils = new Utensils("20","Barbecue", "5000", R.drawable.barbercue);
+        utensils = new Utensils("20","Barbecue", "5000", R.drawable.barbercue,"barbercue.png");
         utensilsList.add(utensils);
 
         utensilsAdapter.notifyDataSetChanged();

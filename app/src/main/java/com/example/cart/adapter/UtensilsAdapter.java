@@ -49,7 +49,7 @@ public class UtensilsAdapter extends RecyclerView.Adapter<UtensilsAdapter.ViewHo
             public void onClick(View v) {
                 Cursor cursor = MainActivity.databaseHelper.checkProduct(utensils.getId());
                 if (cursor.getCount()==0){
-                    MainActivity.databaseHelper.insertData(utensils.getId(),utensils.getName(),utensils.getPrice(),"1",utensils.getPrice());
+                    MainActivity.databaseHelper.insertData(utensils.getId(),utensils.getName(),utensils.getPrice(),"1",utensils.getPrice(),utensils.getImageName());
                     context.startActivity(new Intent(context, MainActivity.class));
                     ((Activity)context).finish();
                 }else {

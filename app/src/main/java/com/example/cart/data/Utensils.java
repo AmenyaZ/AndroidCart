@@ -2,14 +2,15 @@ package com.example.cart.data;
 
 public class Utensils {
 
-    private String id,name,price;
+    private String id,name,price,imageName;
     private int image;
 
-    public Utensils(String id,String name, String price, int image) {
+    public Utensils(String id,String name, String price, int image,String imageName) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
+        this.imageName = imageName;
     }
 
     public Utensils() {
@@ -45,5 +46,13 @@ public class Utensils {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }
