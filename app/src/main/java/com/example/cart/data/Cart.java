@@ -1,15 +1,16 @@
 package com.example.cart.data;
 
 public class Cart {
-    private String id,name,quantity,price;
+    private String id,name,quantity,price,imageName;
     private int total;
 
-    public Cart(String id, String name, String quantity, String price, int total) {
+    public Cart(String id, String name, String quantity, String price, int total,String imageName) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.total = total;
+        this.imageName=imageName;
     }
 
     public Cart() {
@@ -51,4 +52,11 @@ public class Cart {
         return this.total=Integer.parseInt(quantity)*Integer.parseInt(price);
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 }
