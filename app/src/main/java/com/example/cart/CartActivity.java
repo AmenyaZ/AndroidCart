@@ -78,11 +78,13 @@ Button buttonCheckout;
             String name = cursor.getString(1);
             String price = cursor.getString(2);
             String quantity = cursor.getString(3);
+            String imageName = cursor.getString(5);
 
             cart.setId(id);
             cart.setName(name);
             cart.setPrice(price);
             cart.setQuantity(quantity);
+            cart.setImageName(imageName);
             cartList.add(cart);
         }
         cartAdapter.notifyDataSetChanged();
