@@ -37,19 +37,18 @@ import cz.msebera.android.httpclient.Header;
 
 public class CartActivity extends AppCompatActivity {
 
-    private List<Cart> cartList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private CartAdapter cartAdapter;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String PATH_TO_SERVER = "http://192.168.74.212/www.android.com/braintree/index.php";
+    private static final int BRAINTREE_REQUEST_CODE = 4949;
     public static DatabaseHelper databaseHelper;
 
     ConstraintLayout constraintLayout;
-TextView textViewTotal;
-Button buttonCheckout;
-
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String PATH_TO_SERVER = "http://192.168.74.212/www.android.com/braintree/index.php";
+    TextView textViewTotal;
+    Button buttonCheckout;
+    private List<Cart> cartList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private CartAdapter cartAdapter;
     private String clientToken;
-    private static final int BRAINTREE_REQUEST_CODE = 4949;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +56,14 @@ Button buttonCheckout;
         setContentView(R.layout.activity_cart);
         getClientTokenFromServer();
         recyclerView = findViewById(R.id.rv_cart);
-        databaseHelper=new DatabaseHelper(this);
-        cartAdapter = new CartAdapter(cartList,this);
+        databaseHelper = new DatabaseHelper(this);
+        cartAdapter = new CartAdapter(cartList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(cartAdapter);
-        constraintLayout=findViewById(R.id.constraintLayout);
+        constraintLayout = findViewById(R.id.constraintLayout);
         textViewTotal = findViewById(R.id.textViewTotal);
         buttonCheckout = findViewById(R.id.btn_checkout);
 
@@ -78,7 +77,7 @@ Button buttonCheckout;
             String name = cursor.getString(1);
             String price = cursor.getString(2);
             String quantity = cursor.getString(3);
-            String imageName = cursor.getString(5);
+            int imageName = Integer.parseInt(cursor.getString(5));
 
             cart.setId(id);
             cart.setName(name);
@@ -89,7 +88,7 @@ Button buttonCheckout;
         }
         cartAdapter.notifyDataSetChanged();
         if (cartList.size() == 0) {
-            Snackbar snackbar = Snackbar.make(constraintLayout,"Cart Empty",Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(constraintLayout, "Cart Empty", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -105,22 +104,22 @@ Button buttonCheckout;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_cart,menu);
-      //  getActionBar().setDisplayHomeAsUpEnabled(true);
+        getMenuInflater().inflate(R.menu.menu_cart, menu);
+        //  getActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_empty:
                 databaseHelper.clearData();
-                Intent intentR = new Intent(CartActivity.this,CartActivity.class);
+                Intent intentR = new Intent(CartActivity.this, CartActivity.class);
                 finish();
                 startActivity(intentR);
                 break;
             case android.R.id.home:
-                Intent intent = new Intent(CartActivity.this,MainActivity.class);
+                Intent intent = new Intent(CartActivity.this, MainActivity.class);
                 finish();
                 startActivity(intent);
                 break;
@@ -134,13 +133,14 @@ Button buttonCheckout;
         super.onBackPressed();
     }
 
-    private void getClientTokenFromServer(){
+    private void getClientTokenFromServer() {
         AsyncHttpClient androidClient = new AsyncHttpClient();
         androidClient.get(PATH_TO_SERVER, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d(TAG, getString(R.string.token_failed) + responseString);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseToken) {
                 Log.d(TAG, "Client token: " + responseToken);
@@ -149,19 +149,20 @@ Button buttonCheckout;
         });
     }
 
-    private void sendPaymentNonceToServer(String paymentNonce){
+    private void sendPaymentNonceToServer(String paymentNonce) {
         RequestParams params = new RequestParams("NONCE", paymentNonce);
         AsyncHttpClient androidClient = new AsyncHttpClient();
-        androidClient.post(PATH_TO_SERVER+"?&&amount="+databaseHelper.getTotal(), params, new TextHttpResponseHandler() {
+        androidClient.post(PATH_TO_SERVER + "?&&amount=" + databaseHelper.getTotal(), params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d(TAG, "Error: Failed to create a transaction");
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.d(TAG, "Output " + responseString);
                 databaseHelper.clearData();
-                Intent intent = new Intent(CartActivity.this,CartActivity.class);
+                Intent intent = new Intent(CartActivity.this, CartActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -187,7 +188,7 @@ Button buttonCheckout;
         }
     }
 
-    public void onBraintreeSubmit(View view){
+    public void onBraintreeSubmit(View view) {
         DropInRequest dropInRequest = new DropInRequest().clientToken(clientToken);
         startActivityForResult(dropInRequest.getIntent(this), BRAINTREE_REQUEST_CODE);
     }

@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,11 +21,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     private List<Cart> cartList;
     private Context context;
-
-//    public CartAdapter(List<Cart> cartList) {
-//        this.cartList = cartList;
-//    }
-
 
     public CartAdapter(List<Cart> cartList, Context context) {
         this.cartList = cartList;
@@ -43,17 +38,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final CartAdapter.ViewHolder holder, final int position) {
         final Cart cart = cartList.get(position);
-        holder.textViewName.setText(cart.getName()+" X "+cart.getQuantity());
-       // holder.textViewQuantity.setText(cart.getQuantity());
+        holder.textViewName.setText(cart.getName() + " X " + cart.getQuantity());
         holder.textViewPrice.setText(cart.getPrice());
         holder.textViewTotal.setText(String.valueOf(cart.getTotal()));
+        holder.imageView.setImageResource(cart.getImageName());
         holder.buttonRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CartActivity.databaseHelper.deleteData(cart.getId());
                 cartList.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position,getItemCount());
+                notifyItemRangeChanged(position, getItemCount());
             }
         });
     }
@@ -63,17 +58,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return cartList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView textViewName,textViewPrice,textViewTotal;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textViewName, textViewPrice, textViewTotal;
         public Button buttonRemove;
+        public ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewName=itemView.findViewById(R.id.textViewName);
-           // textViewQuantity=itemView.findViewById(R.id.textViewQty);
-            textViewPrice=itemView.findViewById(R.id.textViewPrice);
-            textViewTotal=itemView.findViewById(R.id.textViewTotal);
-            buttonRemove=itemView.findViewById(R.id.btn_remove);
+            textViewName = itemView.findViewById(R.id.textViewName);
+            textViewPrice = itemView.findViewById(R.id.textViewPrice);
+            textViewTotal = itemView.findViewById(R.id.textViewTotal);
+            imageView = itemView.findViewById(R.id.imageView);
+            buttonRemove = itemView.findViewById(R.id.btn_remove);
         }
     }
 }

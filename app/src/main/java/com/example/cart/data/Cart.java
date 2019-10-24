@@ -1,10 +1,12 @@
 package com.example.cart.data;
 
-public class Cart {
-    private String id,name,quantity,price,imageName;
-    private int total;
+import com.example.cart.R;
 
-    public Cart(String id, String name, String quantity, String price, int total,String imageName) {
+public class Cart {
+    private String id,name,quantity,price;
+    private int total,imageName;
+
+    public Cart(String id, String name, String quantity, String price, int total,int imageName) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -52,11 +54,11 @@ public class Cart {
         return this.total=Integer.parseInt(quantity)*Integer.parseInt(price);
     }
 
-    public String getImageName() {
+    public int getImageName() {
         return imageName;
     }
 
-    public void setImageName(String imageName) {
+    public void setImageName(int imageName) {
         this.imageName = imageName;
     }
 }

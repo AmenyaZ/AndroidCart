@@ -48,14 +48,14 @@ public class UtensilsAdapter extends RecyclerView.Adapter<UtensilsAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Cursor cursor = MainActivity.databaseHelper.checkProduct(utensils.getId());
-                if (cursor.getCount()==0){
-                    MainActivity.databaseHelper.insertData(utensils.getId(),utensils.getName(),utensils.getPrice(),"1",utensils.getPrice(),utensils.getImageName());
+                if (cursor.getCount() == 0) {
+                    MainActivity.databaseHelper.insertData(utensils.getId(), utensils.getName(), utensils.getPrice(), "1", utensils.getPrice(), String.valueOf(utensils.getImage()));
                     context.startActivity(new Intent(context, MainActivity.class));
-                    ((Activity)context).finish();
-                }else {
-                    MainActivity.databaseHelper.updateData(utensils.getId(),String.valueOf(MainActivity.databaseHelper.getProductQuantity(utensils.getId())+1),String.valueOf(Integer.parseInt(utensils.getPrice())*(MainActivity.databaseHelper.getProductQuantity(utensils.getId())+1)));
+                    ((Activity) context).finish();
+                } else {
+                    MainActivity.databaseHelper.updateData(utensils.getId(), String.valueOf(MainActivity.databaseHelper.getProductQuantity(utensils.getId()) + 1), String.valueOf(Integer.parseInt(utensils.getPrice()) * (MainActivity.databaseHelper.getProductQuantity(utensils.getId()) + 1)));
                     context.startActivity(new Intent(context, MainActivity.class));
-                    ((Activity)context).finish();
+                    ((Activity) context).finish();
                 }
 
             }
@@ -68,17 +68,18 @@ public class UtensilsAdapter extends RecyclerView.Adapter<UtensilsAdapter.ViewHo
         return utensilsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-         public TextView textViewName,textViewPrice;
-         public ImageView imageView;
-         public Button buttonCart;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textViewName, textViewPrice;
+        public ImageView imageView;
+        public Button buttonCart;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textViewName);
-            textViewPrice=itemView.findViewById(R.id.textViewPrice);
-            imageView=itemView.findViewById(R.id.imageView);
-            buttonCart=itemView.findViewById(R.id.button);
+            textViewPrice = itemView.findViewById(R.id.textViewPrice);
+            imageView = itemView.findViewById(R.id.imageView);
+            buttonCart = itemView.findViewById(R.id.button);
         }
     }
+
 }
