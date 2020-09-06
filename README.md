@@ -11,3 +11,5 @@ Include the Braintree.php to the PHP file.
 Set up the merchantId, publicKey and privateKey.
 
 Get them from https://sandbox.braintreegateway.com
+
+Happy coding 
