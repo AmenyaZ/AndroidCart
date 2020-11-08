@@ -12,4 +12,4 @@ Set up the merchantId, publicKey and privateKey.
 
 Get them from https://sandbox.braintreegateway.com
 
-Happy coding 
+Happy coding :-) 
